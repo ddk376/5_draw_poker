@@ -91,6 +91,12 @@ class Hand
   end
 
   def is_2_pairs?
+    values = self.cards.map {|card| card.value }
+    hand_values = Hash.new{|hash, key| hash[key] = 0}
+    values.each { |card| hand_values[card] += 1 }
+    keys_with_value_of_two = hand_values.select {|key, value| value == 2}
+    return true if hand_values.length == 3 && keys_with_value_of_two.length == 2
+    false
   end
 
   def is_1_pair?

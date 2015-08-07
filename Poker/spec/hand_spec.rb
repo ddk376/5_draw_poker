@@ -147,16 +147,16 @@ describe Hand do
 
   describe "#is_1_pair?" do
     it "validates 1 pair" do
-      expect(royal_flush).to eq(false)
-      expect(straight_flush).to eq(false)
-      expect(four_of_a_kind).to eq(false)
-      expect(full_house).to eq(false)
-      expect(flush).to eq(false)
-      expect(straight).to eq(false)
-      expect(three_of_a_kind).to eq(false)
-      expect(two_pair).to eq(false)
-      expect(one_pair).to eq(true)
-      expect(high_card).to eq(false)
+      expect(royal_flush.is_1_pair?).to eq(false)
+      expect(straight_flush.is_1_pair?).to eq(false)
+      expect(four_of_a_kind.is_1_pair?).to eq(false)
+      expect(full_house.is_1_pair?).to eq(false)
+      expect(flush.is_1_pair?).to eq(false)
+      expect(straight.is_1_pair?).to eq(false)
+      expect(three_of_a_kind.is_1_pair?).to eq(false)
+      expect(two_pair.is_1_pair?).to eq(false)
+      expect(one_pair.is_1_pair?).to eq(true)
+      expect(high_card.is_1_pair?).to eq(false)
     end
   end
 

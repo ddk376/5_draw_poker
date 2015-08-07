@@ -1,3 +1,5 @@
+require_relative 'card'
+require 'byebug'
 class Hand
 
   ROYAL_VALUES = [:ace, :king, :queen, :jack, :ten]
@@ -46,8 +48,8 @@ class Hand
     #anyorder
     suits = self.cards.map {|card| card.suit}
     values = self.cards.map {|card| card.value }
-    # return true if suits.uniq.length == 1 && is_sequence?(values)
-    # false
+    return true if suits.uniq.length == 1 && is_sequence? && !is_royal_flush?
+    false
   end
 
   def is_4_of_a_kind?
@@ -71,12 +73,15 @@ class Hand
   def is_flush?
     #all same suit but no in order
     suits = self.cards.map {|card| card.suit}
-    # return true if suits.uniq.length == 1 &&
-    # false
+    return true if suits.uniq.length == 1 && !is_sequence?
+    false
   end
 
   def is_straight?
     #in order but not same suit
+    suits = self.cards.map {|card| card.suit}
+    return true if suits.uniq.length > 1 && is_sequence?
+    false
   end
 
   def is_3_of_a_kind?
@@ -109,19 +114,55 @@ class Hand
   end
 
   def is_high_card?
+    # NOT IN SEQUENCE
+    suits = self.cards.map {|card| card.suit}
+    values = self.cards.map {|card| card.value }
+    hand_values = Hash.new{|hash, key| hash[key] = 0}
+    values.each { |card| hand_values[card] += 1 }
+    return true if hand_values.length == 5 && suits.uniq.length == 4 && !is_sequence?
+    false
   end
 
-  def is_sequence?(arr_of_values)  #takes a sorted array of cards
+  def is_sequence?
+    # debugger
     arr = Card.values
-    until arr_of_values.first == arr.first
+    values = cards.map {|el| Card::CARD_VALUE[el.value] }
+    values.bubble_sort!{ |num1, num2| num1 <=> num2 }
+    values = values.map {|el| Card::CARD_VALUE.invert[el]}
+    until values.first == arr.first
       arr = arr.rotate
     end
     NUM_OF_CARDS.times do
-      return false if arr_of_values.first != arr.first
-      arr_of_values.rotate!
+      return false if values.first != arr.first
+      values.rotate!
       arr = arr.rotate
     end
     true
+  end
+
+end
+
+class Array
+
+  def bubble_sort!(&prc)
+    prc ||= Proc.new{ |num1, num2| num1 <=> num2 }
+    sorted = false
+    until sorted
+      sorted = true
+      self.length.times do |idx|
+        break if idx == (length - 1)
+        if prc.call(self[idx], self[idx + 1]) == 1
+          self[idx], self[idx + 1] = self[idx + 1], self[idx]
+          sorted = false
+        end
+      end
+    end
+    self
+  end
+
+  def bubble_sort &prc
+    arr = self.dup
+    arr.bubble_sort!(&prc)
   end
 
 end

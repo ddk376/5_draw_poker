@@ -102,16 +102,16 @@ describe Hand do
 
   describe "#is_straight?" do
     it "validates straight" do
-      expect(royal_flush).to eq(false)
-      expect(straight_flush).to eq(false)
-      expect(four_of_a_kind).to eq(false)
-      expect(full_house).to eq(false)
-      expect(flush).to eq(false)
-      expect(straight).to eq(true)
-      expect(three_of_a_kind).to eq(false)
-      expect(two_pair).to eq(false)
-      expect(one_pair).to eq(false)
-      expect(high_card).to eq(false)
+      expect(royal_flush.is_straight?).to eq(false)
+      expect(straight_flush.is_straight?).to eq(false)
+      expect(four_of_a_kind.is_straight?).to eq(false)
+      expect(full_house.is_straight?).to eq(false)
+      expect(flush.is_straight?).to eq(false)
+      expect(straight.is_straight?).to eq(true)
+      expect(three_of_a_kind.is_straight?).to eq(false)
+      expect(two_pair.is_straight?).to eq(false)
+      expect(one_pair.is_straight?).to eq(false)
+      expect(high_card.is_straight?).to eq(false)
     end
   end
 
@@ -162,16 +162,16 @@ describe Hand do
 
   describe "#is_high_card?" do
     it "validates high card" do
-      expect(royal_flush).to eq(false)
-      expect(straight_flush).to eq(false)
-      expect(four_of_a_kind).to eq(false)
-      expect(full_house).to eq(false)
-      expect(flush).to eq(false)
-      expect(straight).to eq(false)
-      expect(three_of_a_kind).to eq(false)
-      expect(two_pair).to eq(false)
-      expect(one_pair).to eq(false)
-      expect(high_card).to eq(true)
+      expect(royal_flush.is_high_card?).to eq(false)
+      expect(straight_flush.is_high_card?).to eq(false)
+      expect(four_of_a_kind.is_high_card?).to eq(false)
+      expect(full_house.is_high_card?).to eq(false)
+      expect(flush.is_high_card?).to eq(false)
+      expect(straight.is_high_card?).to eq(false)
+      expect(three_of_a_kind.is_high_card?).to eq(false)
+      expect(two_pair.is_high_card?).to eq(false)
+      expect(one_pair.is_high_card?).to eq(false)
+      expect(high_card.is_high_card?).to eq(true)
     end
   end
 end
